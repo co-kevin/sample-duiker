@@ -1,0 +1,17 @@
+spring:
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+    zipkin:
+        baseUrl: http://zipkin/
+        locator.discovery.enabled: true
+
+spring.sleuth.rxjava.schedulers.hook.enabled: false
+
+eureka.instance.metadataMap.cluster: ${name:gateway}
+
+info:
+    project:
+        version: 0.0.1-SNAPSHOT
+        title: gateway
+        description: Spring netflix zuul
