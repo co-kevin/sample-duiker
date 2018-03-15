@@ -1,0 +1,9 @@
+{
+  "generator-duiker": {
+    "promptValues": {
+      "group": "space.hookszhang",
+      "name": "service foo",
+      "port": "8082"
+    }
+  }
+}
