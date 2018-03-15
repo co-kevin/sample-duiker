@@ -1,7 +1,7 @@
 buildscript {
 	ext {
-        kotlinVersion = '1.2.0'
-		springBootVersion = '1.5.9.RELEASE'
+        kotlinVersion = '1.2.21'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -21,6 +21,7 @@ apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
 
 group = 'space.hookszhang'
 version = '0.0.1-SNAPSHOT'
@@ -32,12 +33,6 @@ compileTestKotlin {
 	kotlinOptions.jvmTarget = "1.8"
 }
 
-springBoot {
-    mainClass = 'space.hookszhang.service.foo.ServiceFooApplication'
-    executable = true
-    buildInfo()
-}
-
 repositories {
     mavenCentral()
     jcenter()
@@ -47,21 +42,19 @@ repositories {
 }
 
 ext {
-    springCloudVersion = 'Edgware.RELEASE'
+    springCloudVersion = 'Finchley.M8'
     springfoxVersion = '2.7.0'
     duikerVersion = '1.0.0-rc1'
 }
 
 dependencies {
-    compile("com.github.hookszhang:duiker:${duikerVersion}")
+//    compile("com.github.hookszhang:duiker:${duikerVersion}")
     compile("javax.persistence:javax.persistence-api:2.2")
     compile("mysql:mysql-connector-java:5.1.44")
     compile("com.baomidou:mybatis-plus:2.1.4")
     compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1")
-    compile('org.springframework.cloud:spring-cloud-starter-feign')
-    compile("org.springframework.cloud:spring-cloud-starter-eureka-server"){
-        exclude group:'javax.servlet'
-    }
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+    compile("org.springframework.cloud:spring-cloud-starter-sleuth")
     compile("org.projectlombok:lombok:1.16.18")
     compile("com.xiaoleilu:hutool-all:3.2.2")
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
@@ -71,7 +64,7 @@ dependencies {
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
